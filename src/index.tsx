@@ -1,17 +1,69 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import {createStore, applyMiddleware} from 'redux'
+import {Provider} from 'react-redux'
+import thunk from 'redux-thunk'
+import {App} from './components/App'
+import {reducers} from './reducers'
+interface AppProps {
+  color: string;
+}
+
+
+const store = createStore(reducers, applyMiddleware(thunk));
+
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+  <Provider store={store}>
+<App /></Provider>, document.querySelector('#root'));
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+
+
+
+// interface AppState {
+//   counter: number
+// }
+
+// const App = (props: AppProps): JSX.Element => {
+
+//   return <div>
+//     {props.color}
+//   </div>
+// }
+
+
+//class Based Approach
+
+// class App extends React.Component<AppProps, AppState> {
+
+//   constructor(props: AppProps) {
+//     super(props);
+
+//     this.state = { counter: 0}
+//   }
+//   // state ={
+//   //   counter: 0
+//   // };
+
+//   onIncrement = (): void => {
+//     this.setState({
+//       counter: this.state.counter + 1
+//     });
+//   };
+
+//   onDecrement = (): void => {
+//     this.setState({
+//       counter: this.state.counter - 1
+//     });
+//   };
+
+//   render() {
+//     return (
+//       <div>
+//         <button onClick={this.onIncrement}>Increment</button>
+//         <button onClick={this.onDecrement}>Decrement</button>
+//         {this.state.counter}
+//       </div>
+//     )
+//   }
+// }
