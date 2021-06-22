@@ -17,6 +17,10 @@ class _App extends React.Component<AppProps> {
     this.props.fetchTodos()
   }
 
+  displayType = <T, U>(id: T, name: U): void  =>{
+    console.log(typeof(id) + ", " + typeof(name));
+  } 
+
   renderList(): JSX.Element[] {
     return this.props.todos.map((todo: Todo) => {
       return <div key={todo.id}>{todo.title}</div>
@@ -28,6 +32,7 @@ class _App extends React.Component<AppProps> {
   // }
   render(){
     return <div> <button onClick={this.onButtonClick}>Fetch</button>
+    {/* {this.displayType<number, string>(1, "Rohan")} */}
     {this.renderList()}
     </div>
 
